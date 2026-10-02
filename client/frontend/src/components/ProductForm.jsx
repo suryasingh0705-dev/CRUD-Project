@@ -41,8 +41,6 @@ const handleFormSubmit = async (data) => {
       );
     }
 
-    console.log(response);
-
     reset();
     setEditingProduct(null);
     navigate("/");

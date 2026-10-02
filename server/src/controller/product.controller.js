@@ -2,15 +2,12 @@ import productModel from "../model/product.model.js";
 import { deleteFile, uploadFile } from "../services/storage.service.js";
 
 export const createProductController = async (req, res) => {
-  console.log(req.body);
 
   if (!req.file) {
     return res.status(400).json({
       message: "Image field cannot be empty",
     });
   }
-
-  console.log(req.file);
 
   const response = await uploadFile({
     buffer: req.file.buffer,
