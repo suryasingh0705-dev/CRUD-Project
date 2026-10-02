@@ -9,20 +9,21 @@ const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [editingProduct, setEditingProduct] = useState(null);
 
-  const getCurrentUser = async () => {
-    try {
-      const response = await api.get("/auth/me", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      setUser(response.data.data.user);
-    } catch (error) {
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+const getCurrentUser = async (token) => {
+  try {
+    const response = await api.get("/auth/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setUser(response.data.data.user);
+  } catch (error) {
+    setUser(null);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const refreshAccessToken = async () => {
     try {
@@ -81,7 +82,7 @@ const AuthContextProvider = ({ children }) => {
       return;
     }
 
-    await getCurrentUser();
+    await getCurrentUser(accessToken);
   };
 
   initializeAuth();
