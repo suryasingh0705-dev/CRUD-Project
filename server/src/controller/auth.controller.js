@@ -43,6 +43,7 @@ export const registerUserController = async (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: "none",
+    path: "/",
   });
 
   await userModel.findByIdAndUpdate(user._id, {
@@ -100,6 +101,7 @@ export const loginUserController = async (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: "none",
+    path: "/",
   });
 
   res.status(200).json({
@@ -155,6 +157,9 @@ export const refreshUserController = async (req, res) => {
 
     res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
+      secure: true,
+      sameSite: "none", 
+      path: "/",
     });
 
     res.status(200).json({
@@ -197,7 +202,12 @@ export const logoutUserController = async (req, res) => {
     refreshToken: null,
   });
 
-  res.clearCookie("refreshToken");
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/",
+  });
 
   return res.status(200).json({
     message: "Logout successful",
