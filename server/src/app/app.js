@@ -9,7 +9,7 @@ const app = express()
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://crud-project-frontend-ruby.vercel.app/"
+    "https://crud-project-frontend-ruby.vercel.app"
   ],
   credentials: true,
 }));
